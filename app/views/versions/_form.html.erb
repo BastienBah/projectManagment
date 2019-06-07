@@ -1,0 +1,35 @@
+<div class="form">
+  <%= simple_form_for @version do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <div class="row">
+      <div class="col">
+        <%= f.association :prduct, label: 'Products', input_html: { class: 'dropdown' } %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= f.input :wcm, label: 'Version WCM cible' %>
+      </div>
+      <div class="col">
+        <%= f.input :configfile, label: 'Configfile version' %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= f.input :format, include_blank: false, label: "Format"%>
+      </div>
+      <div class="col">
+        <%= f.input :status, include_blank: false, label: "Status"%>
+      </div>
+    </div>
+
+    <div class="footer-buttons">
+      <%= f.button :submit, class: "validate btn", value: "AJOUTER" %>
+      <%= link_to 'ANNULER', projects_path, class: "cancel btn" %>
+    </div>
+<% end %>
+</div>

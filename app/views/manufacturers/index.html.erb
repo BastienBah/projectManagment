@@ -1,0 +1,14 @@
+<%= link_to 'New Manufacturer', new_manufacturer_path, class: "btn btn-primary btn-lg main-btn"%>
+
+
+<div class="row justify-content-md-center">
+  <% @manufacturers.each do |manufacturer| %>
+      <div class="col-sm-3 card">
+        <%= link_to manufacturer_path(manufacturer) do %>
+          <div class="manufacturer-name">
+            <%= manufacturer.name %>
+          </div>
+        <% end %>
+      </div>
+  <% end %>
+</div>

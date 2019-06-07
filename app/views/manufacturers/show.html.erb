@@ -1,0 +1,16 @@
+<h1><%= @manufacturer.name %></h1>
+<p><%= link_to @manufacturer.website %></p>
+
+<%= link_to 'New Product', new_prduct_path, class: "btn btn-primary btn-lg main-btn"%>
+
+<div class="row justify-content-md-center">
+  <% @manufacturer.prducts.each do |product| %>
+      <div class="col-sm-3 card">
+        <%= link_to prduct_path(product) do %>
+          <div class="product-name">
+            <%= product.name %>
+          </div>
+        <% end %>
+      </div>
+  <% end %>
+</div>

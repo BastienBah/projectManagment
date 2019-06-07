@@ -1,0 +1,83 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @prduct.name %></h1>
+
+<div class="links">
+  <%= link_to image_tag("edit.png"), edit_project_path(@prduct) %>  |
+  <% if user_signed_in? && current_user.admin? %>
+    <%= link_to image_tag("delete.png"), @prduct, :method => :delete, confirm: "Are you sure?" %>
+  <% end %>
+</div>
+
+<div class="show">
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <%= image_tag("manufacturer.png") %>
+        </div>
+        <div class="col text">
+          <%= @prduct.manufacturer.name %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <%= image_tag("type.png") %>
+        </div>
+        <div class="col text">
+          <%= @prduct.product_type %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= @prduct.description %>
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table col-md-6 offset-md-3">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">WCM cible</th>
+          <th scope="col">Configfile Version</th>
+          <th scope="col">Format</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @prduct.versions.each do |version| %>
+          <tr>
+            <td><%= version.wcm %></td>
+            <td><%= version.configfile %></td>
+            <td><%= version.format %></td>
+            <td><%= version.status %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= link_to 'Create new version', new_version_path, class: "btn btn-info" %>
+
+  <div class="row">
+    <div class="col-md-6 offset-md-3 driver-list">
+      <div class="row">
+        <%= image_tag("project.png") %><b><p>Utilisé par :</p></b>
+      </div>
+      <div>
+        <ul>
+          <% @prduct.projects.each do |project| %>
+            <%= link_to project_path(project) do %>
+              <li><%= project.client.name %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

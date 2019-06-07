@@ -1,0 +1,56 @@
+<%= link_to 'New Project', new_project_path, class: "btn btn-primary btn-lg main-btn"%>
+<%= link_to 'Create Client', new_client_path, id: 'createClient' %>
+
+<div class="row justify-content-md-center">
+  <% @projects.each do |project| %>
+    <%# <% if project.is_admin != true %>
+      <div class="col-sm-3 card">
+        <%= link_to project_path(project) do %>
+          <div class="row align-items-start">
+            <div class="col">
+              <div class="priority">
+                <%= project.priority %>
+              </div>
+            </div>
+            <div class="col">
+              <div class="name">
+                <h4><%= project.client.name %></h4>
+              </div>
+              <div class="location">
+                <% if project.client.location != nil %>
+                  <%= image_tag("pin.png")%><%= project.client.location %>
+                <% end %>
+              </div>
+            </div>
+            <div class="col">
+            </div>
+          </div>
+          <div class="row align-items-end">
+            <div class="col">
+              <div class="units">
+                <% if project.unitNumber != nil %>
+                  <%= image_tag("server.png") %><%= project.unitNumber %>
+                <% else %>
+                  <%= image_tag("server.png") %><p>TBD</p>
+                <% end %>
+              </div>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+              <div class="site">
+                <% if project.unitNumber != nil %>
+                  <%= image_tag("placeholder.png") %><%= project.siteNumber %>
+                <% else %>
+                  <%= image_tag("server.png") %><p>TBD</p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <%# <% end %>
+  <% end %>
+</div>
+
+

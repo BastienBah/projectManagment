@@ -1,0 +1,94 @@
+<div class="form">
+  <%= simple_form_for @project do |f| %>
+
+    <div class="row">
+      <div class="col">
+        <%= f.association :client, label: 'Client', input_html: { class: 'dropdown' } %>
+        <%= link_to 'Create client', new_client_path %>
+      </div>
+      <div class="col">
+        <%= f.input :priority, include_blank: false%>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= image_tag("placeholder.png") %><%= f.input :siteNumber, label: 'Nombre de site' %>
+      </div>
+      <div class="col">
+        <%= image_tag("server.png") %><%= f.input :unitNumber, label: "Nombre d'équipement" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= image_tag("business.png") %><%= f.association :users, collection: User.business, as: :check_boxes, label_method: :email, label: 'Commerciaux' %>
+      </div>
+      <div class="col">
+        <%= image_tag("support.png") %><%= f.association :users, collection: User.support, as: :check_boxes, label_method: :email, label: 'Support' %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= image_tag("presentation.png") %><%= f.input :project_type %>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col">
+            <%= f.input :installed, label: "Installtion faite ?", input_html: { onchange: 'enable_disable_licence()', id: 'licence' } %>
+          </div>
+          <div class="col">
+            <%= f.input :installation_date, label: "Date de l'installation", input_html: { disabled: true} %>
+          </div>
+        </div>
+        <div class="row">
+          <div class=col>
+            <%= f.input :licence_type, label: "Taille de la licence", input_html: { id: 'licence_type', disabled: true} %>
+          </div>
+          <div class=col>
+            <%= f.input :licence_date_start, label: "Début de la licence", input_html: { disabled: true} %>
+          </div>
+          <div class=col>
+            <%= f.input :licence_date_end, label: "Fin de la licence", input_html: { disabled: true} %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= f.input :description, label: "Description du projet" %>
+      </div>
+    </div> 
+
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <%= image_tag("teamviewer.png") %><%= f.input :has_teamviewer, label: "Accès TeamViewer ?", input_html: { onchange: 'enable_disable_teamviewer()', id: 'teamviewer' } %>
+        <div class="row">
+          <div class="col">
+            <%= f.input :teamviewer_login, label: "Login", input_html: { id: 'teamviewer_login', disabled: true} %>
+          </div>
+          <div class="col">
+            <%= f.input :teamviewer_pass, label: "Password", input_html: { id: 'teamviewer_pass', disabled: true} %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= f.association :prducts, label: 'Drivers', input_html: { class: 'dropdown', multiple:'multiple' } %>
+        <%= link_to 'Create product', new_prduct_path %>
+      </div>
+      <div class="col">
+        
+      </div>
+    </div> 
+
+    <div class="footer-buttons">
+      <%= f.button :submit, class: "validate btn", value: "AJOUTER" %>
+      <%= link_to 'ANNULER', projects_path, class: "cancel btn" %>
+    </div>
+  <% end %>
+</div>

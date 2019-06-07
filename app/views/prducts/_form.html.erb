@@ -1,0 +1,33 @@
+<div class="form">
+  <%= simple_form_for @prduct do |f| %>
+
+    <div class="row">
+      <div class="col">
+        <%= f.association :manufacturer, label: 'Manufacturer', input_html: { class: 'dropdown' } %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= f.input :name, include_blank: false%>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= f.input :product_type, label: "Type d'équipement", placeholder: "Émetteur TV" %>
+      </div>
+      <div class="col">
+        <%= f.input :has_mib, label: "MIB fournie" %>
+        <%= f.input :has_access, label: "Accès fournie", input_html: { onchange: 'myFunction()', id: 'access' } %>
+      </div>
+    </div>
+
+    <%= f.input :description, label: "Description du produit" %>  
+
+    <div class="footer-buttons">
+      <%= f.button :submit, class: "validate btn", value: "AJOUTER" %>
+      <%= link_to 'ANNULER', projects_path, class: "cancel btn" %>
+    </div>
+  <% end %>
+</div>

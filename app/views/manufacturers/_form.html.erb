@@ -1,0 +1,20 @@
+<div class="form">
+  <%= simple_form_for @manufacturer do |f| %>
+    <div class="row">
+      <div class="col">
+        <%= f.input :name, include_blank: false %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= f.input :website %>
+      </div>
+    </div>
+
+    <div class="footer-buttons">
+      <%= f.button :submit, class: "validate btn", value: "AJOUTER" %>
+      <%= link_to 'ANNULER', projects_path, class: "cancel btn" %>
+    </div>
+  <% end %>
+</div>

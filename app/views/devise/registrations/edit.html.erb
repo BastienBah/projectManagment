@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ProjectManagment</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+  </head>
+  <body>
+  <header>
+      <nav class="fixed-navbar">
+            <div class="row align-items-start">
+              <div class="col">
+              <%# ajouter ", authenticated_root_path" %>
+                <%= link_to root_path do%>
+                  <%= image_tag('Worldcast-connect-logo.png', alt: "Worldcast Connect", class: "logo") %>
+                <% end %> 
+              </div>
+              <div class="col title">
+                <h1>Suivi Connect</h1>
+              </div>
+              <div class="col icons">
+                <% if user_signed_in? %>
+                  <%= link_to edit_user_registration_path do%>
+                    <%= image_tag('avatar.png', alt: "Admin", class: "admin") %>
+                  <% end %>
+                <% end %>
+                <%= link_to archive_path do%>
+                  <%= image_tag('archive.png', alt: "Archives", class: "archive") %>
+                <% end %>
+                <%= link_to manufacturers_path do%>
+                  <%= image_tag('database.png', alt: "Drivers", class: "drivers") %>
+                <% end %>
+              </div>
+            </div>
+        </nav>
+    </header>
+  <div class="container">
+    <div class="links">
+      <%= link_to image_tag("delete.png"), registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+    </div>
+    <div class="form">
+      <h2>Edit your account</h2>
+
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= f.error_notification %>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+        <% end %>
+
+        <div class="row justify-content-md-center">
+            <div class="col-6">
+              <%= f.input :email, required: true, autofocus: true %>
+            </div>
+          </div>
+        <div class="row justify-content-md-center">
+          <div class="col-6">
+            <%= f.input :password, hint: "leave it blank if you don't want to change it", required: false, input_html: { autocomplete: "new-password" } %>
+          </div>
+        </div>
+        <div class="row justify-content-md-center">
+          <div class="col-6">
+            <%= f.input :password_confirmation, required: false, input_html: { autocomplete: "new-password" } %>
+          </div>
+        </div>
+        <div class="row justify-content-md-center">
+          <div class="col-6">
+            <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true, input_html: { autocomplete: "current-password" } %>
+          </div>
+        </div>
+
+        <div class="footer-buttons">
+          <%= f.button :submit, class: "validate btn", value: "AJOUTER" %>
+          <%= link_to 'ANNULER', projects_path, class: "cancel btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  </body>
+</html>

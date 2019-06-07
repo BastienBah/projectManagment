@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ProjectManagment</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+  </head>
+  <body>
+  <header>
+      <nav class="fixed-navbar">
+            <div class="row align-items-start">
+              <div class="col">
+              <%# ajouter ", authenticated_root_path" %>
+                <%= link_to root_path do%>
+                  <%= image_tag('Worldcast-connect-logo.png', alt: "Worldcast Connect", class: "logo") %>
+                <% end %> 
+              </div>
+              <div class="col title">
+                <h1>Suivi Connect</h1>
+              </div>
+              <div class="col icons">
+                <% if user_signed_in? %>
+                  <%= link_to edit_user_registration_path do%>
+                    <%= image_tag('avatar.png', alt: "Admin", class: "admin") %>
+                  <% end %>
+                <% end %>
+                <%= link_to archive_path do%>
+                  <%= image_tag('archive.png', alt: "Archives", class: "archive") %>
+                <% end %>
+                <%= link_to manufacturers_path do%>
+                  <%= image_tag('database.png', alt: "Drivers", class: "drivers") %>
+                <% end %>
+              </div>
+            </div>
+        </nav>
+    </header>
+  <div class="container">
+    <%= yield %>
+  </div>
+  </body>
+</html>
